@@ -5,10 +5,6 @@
 #include "AIRecognition.h"
 #include "asr.h"
 
-// Source - https://stackoverflow.com/a/7748079
-// Posted by Mysticial, modified by community. See post 'Timeline' for change history
-// Retrieved 2026-02-23, License - CC BY-SA 3.0
-
 void onButtonAPressed();
 void onButtonBPressed();
 void onButtonABPressed();
@@ -368,14 +364,6 @@ void journal()
     k10.canvas->updateCanvas();
 }
 
-void zeckoai()
-{
-}
-
-void airecognition()
-{
-}
-
 void reaction()
 {
     k10.canvas->canvasClear();
@@ -385,4 +373,12 @@ void reaction()
     k10.canvas->canvasText("see the color:", 10, 40, 0x008000, k10.canvas->eCNAndENFont24, 21, false);
     k10.canvas->canvasText(ColorSelected, 10, 70, 0x008000, k10.canvas->eCNAndENFont24, 21, false);
     k10.canvas->updateCanvas();
+}
+
+void zeckoai()
+{
+}
+
+void airecognition()
+{
 }
