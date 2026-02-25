@@ -102,6 +102,14 @@ void loop()
         k10.canvas->canvasText("You win", 10, 10, 0x008000, k10.canvas->eCNAndENFont24, 21, false);
         k10.canvas->updateCanvas();
     }
+    if (pressA == 6001 && randomColor != 0)
+    {
+        k10.canvas->canvasClear();
+        k10.creatCanvas();
+        k10.canvas->canvasRectangle(1, 1, 239, 319, 0x1F51FF, 0x1F51FF, false);
+        k10.canvas->canvasText("You lost", 10, 10, 0x008000, k10.canvas->eCNAndENFont24, 21, false);
+        k10.canvas->updateCanvas();
+    }
 }
 
 void startup()
