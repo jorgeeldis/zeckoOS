@@ -20,7 +20,7 @@ void workout();
 void zeckoai();
 void weather();
 void airecognition();
-void animalrecognition();
+void reaction();
 void journal();
 
 volatile uint8_t step = 0;
@@ -35,8 +35,13 @@ uint8_t screen_dir = 2;
 Music music;
 AHT20 aht20;
 int randomNumber = random(10000);
+int random10Sec = random(10000);
+int randomColor = random(5);
 String filename = "S:/photo" + String(randomNumber) + ".bmp";
 String voicerecord = "S:/sound" + String(randomNumber) + ".wav";
+String ColorSelected = "White";
+
+int Colors[] = {0xFFFFFF, 0xFF0000, 0x00FF00, 0x0000FF, 0x000000};
 
 void setup()
 {
@@ -79,6 +84,28 @@ void loop()
     {
         workout();
     }
+    if (pressA == 6000)
+    {
+        reaction();
+        delay(2000);
+        while (pressA == 6000)
+        {
+            k10.setScreenBackground(Colors[randomColor]);
+            delay(2000);
+            while (randomColor != 0)
+            {
+                randomColor = random(5);
+            }
+        }
+    }
+    if (pressA == 6001 && randomColor == 0)
+    {
+        k10.canvas->canvasClear();
+        k10.creatCanvas();
+        k10.canvas->canvasRectangle(1, 1, 239, 319, 0x1F51FF, 0x1F51FF, false);
+        k10.canvas->canvasText("You win", 10, 10, 0x008000, k10.canvas->eCNAndENFont24, 21, false);
+        k10.canvas->updateCanvas();
+    }
 }
 
 void startup()
@@ -90,6 +117,7 @@ void startup()
 
 void menu()
 {
+    k10.setScreenBackground(0x000000);
     k10.canvas->canvasClear();
     k10.canvas->canvasRectangle(1, 1, 239, 319, 0x1F51FF, 0x1F51FF, false);
     k10.canvas->canvasText("menu", 10, 10, 0x008000, Canvas::eCNAndENFont24, 5, false);
@@ -99,7 +127,7 @@ void menu()
     k10.canvas->canvasText("zecko ai", 10, 140, 0x008000, Canvas::eCNAndENFont24, 9, false);
     k10.canvas->canvasText("weather", 10, 170, 0x008000, Canvas::eCNAndENFont24, 8, false);
     k10.canvas->canvasText("ai recognition", 10, 200, 0x008000, Canvas::eCNAndENFont24, 15, false);
-    k10.canvas->canvasText("animal recognition", 10, 230, 0x008000, Canvas::eCNAndENFont24, 19, false);
+    k10.canvas->canvasText("reaction game", 10, 230, 0x008000, Canvas::eCNAndENFont24, 19, false);
     k10.canvas->canvasText("journal", 10, 260, 0x008000, Canvas::eCNAndENFont24, 19, false);
     k10.canvas->updateCanvas();
 }
@@ -154,18 +182,18 @@ void onButtonAPressed()
         k10.canvas->canvasText("ai recognition", 10, 200, 0x1F51FF, Canvas::eCNAndENFont24, 15, false);
         k10.canvas->updateCanvas();
     }
-    else if (pressA == 7) // Select animal recognition
+    else if (pressA == 7) // Select reaction game
     {
         music.playTone(220, 2000);
         k10.canvas->canvasText("ai recognition", 10, 200, 0x008000, Canvas::eCNAndENFont24, 15, false);
         k10.canvas->updateCanvas();
-        k10.canvas->canvasText("animal recognition", 10, 230, 0x1F51FF, Canvas::eCNAndENFont24, 19, false);
+        k10.canvas->canvasText("reaction game", 10, 230, 0x1F51FF, Canvas::eCNAndENFont24, 19, false);
         k10.canvas->updateCanvas();
     }
     else if (pressA == 8) // Select journal
     {
         music.playTone(220, 2000);
-        k10.canvas->canvasText("animal recognition", 10, 230, 0x008000, Canvas::eCNAndENFont24, 19, false);
+        k10.canvas->canvasText("reaction game", 10, 230, 0x008000, Canvas::eCNAndENFont24, 19, false);
         k10.canvas->updateCanvas();
         k10.canvas->canvasText("journal", 10, 260, 0x1F51FF, Canvas::eCNAndENFont24, 8, false);
         k10.canvas->updateCanvas();
@@ -248,7 +276,7 @@ void onButtonBPressed()
         pressA = 6000;
         pressB = 6000;
         music.playTone(220, 2000);
-        animalrecognition();
+        reaction();
         break;
     case 8:
         pressA = 7000;
@@ -286,7 +314,8 @@ void musicplayer()
 
 void workout()
 {
-    if (((k10.getStrength())>1080)) {
+    if (((k10.getStrength()) > 1080))
+    {
         step += 1;
     }
     sec++;
@@ -347,6 +376,13 @@ void airecognition()
 {
 }
 
-void animalrecognition()
+void reaction()
 {
+    k10.canvas->canvasClear();
+    k10.creatCanvas();
+    k10.canvas->canvasRectangle(1, 1, 239, 319, 0x1F51FF, 0x1F51FF, false);
+    k10.canvas->canvasText("Press A when you", 10, 10, 0x008000, k10.canvas->eCNAndENFont24, 21, false);
+    k10.canvas->canvasText("see the color:", 10, 40, 0x008000, k10.canvas->eCNAndENFont24, 21, false);
+    k10.canvas->canvasText(ColorSelected, 10, 70, 0x008000, k10.canvas->eCNAndENFont24, 21, false);
+    k10.canvas->updateCanvas();
 }
