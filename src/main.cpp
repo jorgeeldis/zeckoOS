@@ -36,6 +36,7 @@ int randomColor = random(5);
 String filename = "S:/photo" + String(randomNumber) + ".bmp";
 String voicerecord = "S:/sound" + String(randomNumber) + ".wav";
 String ColorSelected = "White";
+AIRecognition ai;
 
 int Colors[] = {0xFFFFFF, 0xFF0000, 0x00FF00, 0x0000FF, 0x000000};
 
@@ -44,6 +45,7 @@ void setup()
     Wire.begin();
     k10.begin();
     k10.initScreen(screen_dir);
+    ai.initAi();
     k10.creatCanvas();
     k10.setScreenBackground(0x000000);
     k10.buttonA->setPressedCallback(onButtonAPressed);
@@ -53,12 +55,12 @@ void setup()
     startup();
     delay(2000);
     menu();
+    k10.rgb->brightness(round(5));
+    k10.rgb->write(-1, 0x008000);
 }
 
 void loop()
 {
-    k10.rgb->brightness(round(5));
-    k10.rgb->write(-1, 0x008000);
     if (pressA == 4000 && pressB == 4000)
     {
         weather();
@@ -110,10 +112,26 @@ void loop()
         k10.canvas->canvasText("You lost", 10, 10, 0x008000, k10.canvas->eCNAndENFont24, 21, false);
         k10.canvas->updateCanvas();
     }
+    if (pressA == 5000 && pressB == 5000)
+    {
+        if (ai.isDetectContent(AIRecognition::Face))
+        {
+            k10.rgb->write(-1, 0xFF0000);
+            k10.canvas->canvasText((String("Face Length") + String(ai.getFaceData(AIRecognition::Length))), 0, 0, 0x0000FF, k10.canvas->eCNAndENFont16, 50, true);
+            k10.canvas->canvasText((String("Face Width ") + String(ai.getFaceData(AIRecognition::Length))), 0, 16, 0x0000FF, k10.canvas->eCNAndENFont16, 50, true);
+            k10.canvas->canvasText((String("Face Center X") + String(ai.getFaceData(AIRecognition::CenterX))), 0, 32, 0x0000FF, k10.canvas->eCNAndENFont16, 50, true);
+            k10.canvas->canvasText((String("Face Center Y") + String(ai.getFaceData(AIRecognition::CenterY))), 0, 32, 0x0000FF, k10.canvas->eCNAndENFont16, 50, true);
+            k10.canvas->updateCanvas();
+            k10.rgb->write(-1, 0xFF0000);
+        }
+        delay(1000);
+    }
 }
 
 void startup()
 {
+    k10.rgb->brightness(round(5));
+    k10.rgb->write(-1, 0x1F51FF);
     k10.canvas->canvasRectangle(1, 1, 239, 319, 0x1F51FF, 0x1F51FF, false);
     k10.canvas->canvasText("hi! this is zecko!", 20, 160, 0x008000, Canvas::eCNAndENFont24, 19, false);
     k10.canvas->updateCanvas();
@@ -389,4 +407,11 @@ void zeckoai()
 
 void airecognition()
 {
+    ai.initAi();
+    k10.initBgCamerImage();
+    k10.setBgCamerImage(false);
+    k10.creatCanvas();
+    ai.switchAiMode(ai.NoMode);
+    k10.setBgCamerImage(true);
+    ai.switchAiMode(ai.Face);
 }
