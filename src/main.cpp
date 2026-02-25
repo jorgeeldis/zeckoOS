@@ -407,7 +407,6 @@ void zeckoai()
 
 void airecognition()
 {
-    ai.initAi();
     k10.initBgCamerImage();
     k10.setBgCamerImage(false);
     k10.creatCanvas();
