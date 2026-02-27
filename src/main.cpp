@@ -572,7 +572,7 @@ void typeLine(String msg, uint16_t color)
     for (int i = 0; i < msg.length(); i++)
     {
         buffer += msg[i];
-        k10.canvas->canvasText(buffer, 10, 140, color, Canvas::eCNAndENFont24, 40, true);
+        k10.canvas->canvasText(buffer, 10, 140, color, Canvas::eCNAndENFont16, 40, true);
         k10.canvas->updateCanvas();
         delay(20);
     }
