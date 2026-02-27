@@ -279,10 +279,10 @@ void loop()
         if (ai.isDetectContent(AIRecognition::Face))
         {
             k10.rgb->write(-1, 0xFF0000);
-            k10.canvas->canvasText((String("Face Length") + String(ai.getFaceData(AIRecognition::Length))), 0, 0, 0x0000FF, k10.canvas->eCNAndENFont16, 50, true);
-            k10.canvas->canvasText((String("Face Width ") + String(ai.getFaceData(AIRecognition::Length))), 0, 16, 0x0000FF, k10.canvas->eCNAndENFont16, 50, true);
-            k10.canvas->canvasText((String("Face Center X") + String(ai.getFaceData(AIRecognition::CenterX))), 0, 32, 0x0000FF, k10.canvas->eCNAndENFont16, 50, true);
-            k10.canvas->canvasText((String("Face Center Y") + String(ai.getFaceData(AIRecognition::CenterY))), 0, 32, 0x0000FF, k10.canvas->eCNAndENFont16, 50, true);
+            k10.canvas->canvasText((String("Face Length") + String(ai.getFaceData(AIRecognition::Length))), 0, 0, 0x0000FF, k10.canvas->eCNAndENFont24, 50, true);
+            k10.canvas->canvasText((String("Face Width ") + String(ai.getFaceData(AIRecognition::Length))), 0, 16, 0x0000FF, k10.canvas->eCNAndENFont24, 50, true);
+            k10.canvas->canvasText((String("Face Center X") + String(ai.getFaceData(AIRecognition::CenterX))), 0, 32, 0x0000FF, k10.canvas->eCNAndENFont24, 50, true);
+            k10.canvas->canvasText((String("Face Center Y") + String(ai.getFaceData(AIRecognition::CenterY))), 0, 32, 0x0000FF, k10.canvas->eCNAndENFont24, 50, true);
             k10.canvas->updateCanvas();
             k10.rgb->write(-1, 0xFF0000);
         }
@@ -572,7 +572,7 @@ void typeLine(String msg, uint16_t color)
     for (int i = 0; i < msg.length(); i++)
     {
         buffer += msg[i];
-        k10.canvas->canvasText(buffer, 10, 140, color, Canvas::eCNAndENFont16, 40, true);
+        k10.canvas->canvasText(buffer, 10, 140, color, Canvas::eCNAndENFont24, 40, true);
         k10.canvas->updateCanvas();
         delay(20);
     }
