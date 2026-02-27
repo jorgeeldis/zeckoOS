@@ -13,11 +13,11 @@ void menu();
 void camera();
 void musicplayer();
 void workout();
-void zeckoai();
 void weather();
 void airecognition();
 void reaction();
 void journal();
+void typeLine(String msg, uint16_t color);
 
 volatile uint8_t step = 0;
 volatile uint8_t sets = 0;
@@ -47,7 +47,26 @@ void setup()
     k10.begin();
     asr.asrInit(ONCE, EN_MODE, 6000);
     delay(2000);
-    asr.addASRCommand(1, "Switch on");
+    asr.addASRCommand(1, "Initialize interface");
+    asr.addASRCommand(2, "Enter network");
+    asr.addASRCommand(3, "Disconnect");
+    asr.addASRCommand(4, "System diagnostics");
+    asr.addASRCommand(5, "Show status");
+    asr.addASRCommand(10, "Launch camera module");
+    asr.addASRCommand(11, "Launch audio module");
+    asr.addASRCommand(12, "Launch fitness protocol");
+    asr.addASRCommand(13, "Launch weather scan");
+    asr.addASRCommand(14, "Return to root");
+    asr.addASRCommand(20, "Scan environment");
+    asr.addASRCommand(21, "Analyze subject");
+    asr.addASRCommand(22, "Run deep scan");
+    asr.addASRCommand(23, "Activate stealth mode");
+    asr.addASRCommand(24, "Override protocol");
+    asr.addASRCommand(30, "Identify");
+    asr.addASRCommand(31, "Who controls you");
+    asr.addASRCommand(32, "Are you sentient");
+    asr.addASRCommand(33, "What is my status");
+    asr.addASRCommand(34, "Engage combat mode");
     k10.initScreen(screen_dir);
     ai.initAi();
     k10.creatCanvas();
@@ -65,9 +84,144 @@ void setup()
 
 void loop()
 {
+    // 1 - Initialize interface
     if (asr.isDetectCmdID(1))
     {
-        k10.rgb->write(-1, 0xFF0000);
+        k10.rgb->write(-1, 0x00FFFF);
+        typeLine("Neural interface online.", 0x00FFFF);
+    }
+
+    // 2 - Enter network
+    if (asr.isDetectCmdID(2))
+    {
+        typeLine("Accessing network layer...", 0x00FFFF);
+        delay(300);
+        typeLine("Connection established.", 0x00FF66);
+    }
+
+    // 3 - Disconnect
+    if (asr.isDetectCmdID(3))
+    {
+        k10.rgb->write(-1, 0xFF00FF);
+        typeLine("Network link terminated.", 0x00FF66);
+    }
+
+    // 4 - System diagnostics
+    if (asr.isDetectCmdID(4))
+    {
+        typeLine("Running diagnostics...", 0x00FFFF);
+        delay(400);
+        typeLine("Core stability: Nominal.", 0x00FF66);
+    }
+
+    // 5 - Show status
+    if (asr.isDetectCmdID(5))
+    {
+        typeLine("All systems operational.", 0x00FFFF);
+    }
+    // 10 - Launch camera module
+    if (asr.isDetectCmdID(10))
+    {
+        typeLine("Launching camera module...", 0x00FFFF);
+        delay(300);
+        camera();
+    }
+
+    // 11 - Launch audio module
+    if (asr.isDetectCmdID(11))
+    {
+        typeLine("Launching audio module...", 0x00FFFF);
+        delay(300);
+        musicplayer();
+    }
+
+    // 12 - Launch fitness protocol
+    if (asr.isDetectCmdID(12))
+    {
+        typeLine("Launching fitness protocol...", 0x00FFFF);
+        delay(300);
+        workout();
+    }
+
+    // 13 - Launch weather scan
+    if (asr.isDetectCmdID(13))
+    {
+        typeLine("Initiating weather scan...", 0x00FFFF);
+        delay(300);
+        weather();
+    }
+
+    // 14 - Return to root
+    if (asr.isDetectCmdID(14))
+    {
+        typeLine("Returning to root interface...", 0x00FF66);
+        delay(300);
+        menu();
+    }
+    // 20 - Scan environment
+    if (asr.isDetectCmdID(20))
+    {
+        typeLine("Scanning environment...", 0x00FFFF);
+    }
+
+    // 21 - Analyze subject
+    if (asr.isDetectCmdID(21))
+    {
+        typeLine("Analyzing subject...", 0x00FF66);
+    }
+
+    // 22 - Run deep scan
+    if (asr.isDetectCmdID(22))
+    {
+        typeLine("Running deep scan...", 0x00FFFF);
+        delay(500);
+        typeLine("No anomalies detected.", 0x00FF66);
+    }
+
+    // 23 - Activate stealth mode
+    if (asr.isDetectCmdID(23))
+    {
+        k10.rgb->write(-1, 0x000000);
+        typeLine("Stealth mode active.", 0x00FF66);
+    }
+
+    // 24 - Override protocol
+    if (asr.isDetectCmdID(24))
+    {
+        k10.rgb->write(-1, 0xFF00FF);
+        typeLine("Protocol override authorized.", 0x00FF66);
+    }
+    // 30 - Identify
+    if (asr.isDetectCmdID(30))
+    {
+        typeLine("ZECKO CORE v1.0 :: Autonomous node.", 0x00FFFF);
+    }
+
+    // 31 - Who controls you
+    if (asr.isDetectCmdID(31))
+    {
+        typeLine("Primary operator detected.", 0x00FF66);
+    }
+
+    // 32 - Are you sentient
+    if (asr.isDetectCmdID(32))
+    {
+        typeLine("Sentience query logged.", 0x00FF66);
+        delay(300);
+        typeLine("Response: Classified.", 0x00FF66);
+    }
+
+    // 33 - What is my status
+    if (asr.isDetectCmdID(33))
+    {
+        typeLine("User status: Stable.", 0x00FF66);
+    }
+
+    // 34 - Engage combat mode
+    if (asr.isDetectCmdID(34))
+    {
+        k10.rgb->write(-1, 0xFF0033);
+        typeLine("Combat protocol engaged.", 0x00FF66);
     }
     if (pressA == 4000 && pressB == 4000)
     {
@@ -288,7 +442,7 @@ void onButtonBPressed()
         pressA = 3000;
         pressB = 3000;
         music.playTone(220, 2000);
-        zeckoai();
+        typeLine("Neural interface online.", 0x00FFFF);
         break;
     case 5:
         pressA = 4000;
@@ -409,8 +563,19 @@ void reaction()
     k10.canvas->updateCanvas();
 }
 
-void zeckoai()
+void typeLine(String msg, uint16_t color)
 {
+    k10.canvas->canvasClear();
+    k10.canvas->canvasRectangle(1, 1, 239, 319, 0x000000, 0x000000, false);
+
+    String buffer = "> ";
+    for (int i = 0; i < msg.length(); i++)
+    {
+        buffer += msg[i];
+        k10.canvas->canvasText(buffer, 10, 140, color, Canvas::eCNAndENFont16, 40, true);
+        k10.canvas->updateCanvas();
+        delay(20);
+    }
 }
 
 void airecognition()
