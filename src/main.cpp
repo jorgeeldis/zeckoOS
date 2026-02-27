@@ -37,6 +37,7 @@ String filename = "S:/photo" + String(randomNumber) + ".bmp";
 String voicerecord = "S:/sound" + String(randomNumber) + ".wav";
 String ColorSelected = "White";
 AIRecognition ai;
+ASR asr;
 
 int Colors[] = {0xFFFFFF, 0xFF0000, 0x00FF00, 0x0000FF, 0x000000};
 
@@ -44,6 +45,9 @@ void setup()
 {
     Wire.begin();
     k10.begin();
+    asr.asrInit(ONCE, EN_MODE, 6000);
+    delay(2000);
+    asr.addASRCommand(1, "Switch on");
     k10.initScreen(screen_dir);
     ai.initAi();
     k10.creatCanvas();
@@ -61,6 +65,10 @@ void setup()
 
 void loop()
 {
+    if (asr.isDetectCmdID(1))
+    {
+        k10.rgb->write(-1, 0xFF0000);
+    }
     if (pressA == 4000 && pressB == 4000)
     {
         weather();
