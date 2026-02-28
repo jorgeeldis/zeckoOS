@@ -76,6 +76,7 @@ void setup()
     k10.buttonAB->setPressedCallback(onButtonABPressed);
     k10.canvas->canvasClear();
     startup();
+    k10.initSDFile();
     delay(2000);
     menu();
     k10.rgb->brightness(round(5));
@@ -480,10 +481,11 @@ void onButtonABPressed()
 
 void camera()
 {
-    k10.canvas->canvasClear();
+    ai.switchAiMode(ai.NoMode);
+    delay(100);
     k10.initBgCamerImage();
+    k10.setBgCamerImage(false);
     k10.creatCanvas();
-    k10.initSDFile();
     k10.setBgCamerImage(true);
 }
 
