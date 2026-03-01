@@ -18,6 +18,9 @@ void airecognition();
 void reaction();
 void journal();
 void typeLine(String msg, uint16_t color);
+void eyesAnimation();
+void soundGUI();
+void chatbot();
 
 volatile uint8_t step = 0;
 volatile uint8_t sets = 0;
@@ -75,8 +78,8 @@ void setup()
     k10.buttonB->setPressedCallback(onButtonBPressed);
     k10.buttonAB->setPressedCallback(onButtonABPressed);
     k10.canvas->canvasClear();
-    startup();
     k10.initSDFile();
+    startup();
     delay(2000);
     menu();
     k10.rgb->brightness(round(5));
@@ -224,6 +227,10 @@ void loop()
         k10.rgb->write(-1, 0xFF0033);
         typeLine("Combat protocol engaged.", 0x00FF66);
     }
+    if (pressA == 3000)
+    {
+        chatbot();
+    }
     if (pressA == 4000 && pressB == 4000)
     {
         weather();
@@ -237,6 +244,7 @@ void loop()
         music.recordSaveToTFCard(voicerecord, 60);
         k10.canvas->canvasClear();
         k10.canvas->canvasRectangle(1, 1, 239, 319, 0x1F51FF, 0x1F51FF, false);
+        soundGUI();
         k10.canvas->canvasText("Record complete", 10, 10, 0x008000, k10.canvas->eCNAndENFont24, 16, false);
         k10.canvas->updateCanvas();
         pressA = 7500;
@@ -280,7 +288,7 @@ void loop()
         if (ai.isDetectContent(AIRecognition::Face))
         {
             k10.rgb->write(-1, 0xFF0000);
-            k10.canvas->canvasText((String("Face Length") + String(ai.getFaceData(AIRecognition::Length))), 0, 0, 0x0000FF, k10.canvas->eCNAndENFont24, 50, true);
+            k10.canvas->canvasText((String("Face Length") + String(ai.getFaceData(AIRecognition::Length))), 10, 80, 0x0000FF, k10.canvas->eCNAndENFont24, 50, true);
             k10.canvas->canvasText((String("Face Width ") + String(ai.getFaceData(AIRecognition::Length))), 0, 16, 0x0000FF, k10.canvas->eCNAndENFont24, 50, true);
             k10.canvas->canvasText((String("Face Center X") + String(ai.getFaceData(AIRecognition::CenterX))), 0, 32, 0x0000FF, k10.canvas->eCNAndENFont24, 50, true);
             k10.canvas->canvasText((String("Face Center Y") + String(ai.getFaceData(AIRecognition::CenterY))), 0, 32, 0x0000FF, k10.canvas->eCNAndENFont24, 50, true);
@@ -289,6 +297,320 @@ void loop()
         }
         delay(1000);
     }
+    if (pressA == 1001)
+    {
+        soundGUI();
+    }
+}
+
+void eyesAnimation()
+{
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_00_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_01_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_02_delay-0.05s.png");
+    k10.canvas->updateCanvas();
+    delay(50);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_03_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_04_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_05_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_06_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_07_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_08_delay-0.05s.png");
+    k10.canvas->updateCanvas();
+    delay(50);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_09_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_10_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_11_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_12_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_13_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_14_delay-0.38s.png");
+    k10.canvas->updateCanvas();
+    delay(380);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_15_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_16_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_17_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_18_delay-0.05s.png");
+    k10.canvas->updateCanvas();
+    delay(50);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_19_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_20_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_21_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_22_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_23_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_24_delay-0.05s.png");
+    k10.canvas->updateCanvas();
+    delay(50);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_25_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_26_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_27_delay-0.04s.png");
+    k10.canvas->updateCanvas();
+    delay(40);
+
+    k10.canvas->canvasDrawImage(60, 80, "S:/eyes/frame_28_delay-0.29s.png");
+    k10.canvas->updateCanvas();
+    delay(290);
+}
+
+void soundGUI()
+{
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_00_delay-0.07s.png");
+    k10.canvas->updateCanvas();
+    delay(70);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_01_delay-0.03s.png");
+    k10.canvas->updateCanvas();
+    delay(30);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_02_delay-0.07s.png");
+    k10.canvas->updateCanvas();
+    delay(70);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_03_delay-0.07s.png");
+    k10.canvas->updateCanvas();
+    delay(70);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_04_delay-0.1s.png");
+    k10.canvas->updateCanvas();
+    delay(100);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_05_delay-0.07s.png");
+    k10.canvas->updateCanvas();
+    delay(70);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_06_delay-0.07s.png");
+    k10.canvas->updateCanvas();
+    delay(70);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_07_delay-0.1s.png");
+    k10.canvas->updateCanvas();
+    delay(100);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_08_delay-0.1s.png");
+    k10.canvas->updateCanvas();
+    delay(100);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_09_delay-0.1s.png");
+    k10.canvas->updateCanvas();
+    delay(100);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_10_delay-0.1s.png");
+    k10.canvas->updateCanvas();
+    delay(100);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_11_delay-0.07s.png");
+    k10.canvas->updateCanvas();
+    delay(70);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_12_delay-0.13s.png");
+    k10.canvas->updateCanvas();
+    delay(130);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_13_delay-0.03s.png");
+    k10.canvas->updateCanvas();
+    delay(30);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_14_delay-0.03s.png");
+    k10.canvas->updateCanvas();
+    delay(30);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_15_delay-0.03s.png");
+    k10.canvas->updateCanvas();
+    delay(30);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_16_delay-0.1s.png");
+    k10.canvas->updateCanvas();
+    delay(100);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_17_delay-0.07s.png");
+    k10.canvas->updateCanvas();
+    delay(70);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_18_delay-0.07s.png");
+    k10.canvas->updateCanvas();
+    delay(70);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_19_delay-0.1s.png");
+    k10.canvas->updateCanvas();
+    delay(100);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_20_delay-0.07s.png");
+    k10.canvas->updateCanvas();
+    delay(70);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_21_delay-0.1s.png");
+    k10.canvas->updateCanvas();
+    delay(100);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_22_delay-0.1s.png");
+    k10.canvas->updateCanvas();
+    delay(100);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_23_delay-0.1s.png");
+    k10.canvas->updateCanvas();
+    delay(100);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_24_delay-0.07s.png");
+    k10.canvas->updateCanvas();
+    delay(70);
+
+    k10.canvas->canvasDrawImage(50, 150, "S:/sound/frame_25_delay-0.07s.png");
+    k10.canvas->updateCanvas();
+    delay(70);
+}
+
+void chatbot()
+{
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_00_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_01_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_02_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_03_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_04_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_05_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_06_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_07_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_08_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_09_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_10_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_11_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_12_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_13_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_14_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_15_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_16_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_17_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_18_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_19_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_20_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_21_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_22_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_23_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_24_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_25_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_26_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_27_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_28_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_29_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_30_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_31_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_32_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_33_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_34_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_35_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_36_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_37_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_38_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_39_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_40_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_41_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_42_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_43_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_44_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_45_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_46_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_47_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_48_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_49_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_50_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_51_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_52_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_53_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_54_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_55_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_56_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_57_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_58_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_59_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_60_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_61_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_62_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_63_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_64_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_65_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_66_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_67_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_68_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_69_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_70_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
+    k10.canvas->canvasDrawImage(0, 50, "S:/chatbot/frame_71_delay-0.05s.png"); k10.canvas->updateCanvas(); delay(16);
 }
 
 void startup()
@@ -296,6 +618,7 @@ void startup()
     k10.rgb->brightness(round(5));
     k10.rgb->write(-1, 0x1F51FF);
     k10.canvas->canvasRectangle(1, 1, 239, 319, 0x1F51FF, 0x1F51FF, false);
+    eyesAnimation();
     k10.canvas->canvasText("hi! this is zecko!", 20, 160, 0x008000, Canvas::eCNAndENFont24, 19, false);
     k10.canvas->updateCanvas();
 }
@@ -401,8 +724,9 @@ void onButtonAPressed()
         k10.canvas->canvasClear();
         k10.canvas->canvasRectangle(1, 1, 239, 319, 0x1F51FF, 0x1F51FF, false);
         k10.canvas->canvasText("Playing...", 10, 10, 0x008000, Canvas::eCNAndENFont24, 20, false);
+
         k10.canvas->updateCanvas();
-        music.playTFCardAudio("S:/car-horn.wav");
+        music.playTFCardAudio("S:/synth.wav");
     }
     else if (pressA >= 2001 && pressA <= 2800)
     {
@@ -519,10 +843,33 @@ void workout()
     k10.canvas->canvasText("Step Count: " + StrStep, 10, 50, 0x008000, Canvas::eCNAndENFont24, 16, false);
     k10.canvas->canvasText("Set: " + StrSets, 10, 80, 0x008000, Canvas::eCNAndENFont24, 16, false);
     k10.canvas->canvasText("Reps: " + StrReps, 10, 110, 0x008000, Canvas::eCNAndENFont24, 16, false);
-    k10.canvas->canvasText("Time: ", 10, 140, 0x008000, Canvas::eCNAndENFont24, 16, false);
-    k10.canvas->canvasText(" " + String(minute) + " : " + String(sec), 90, 220, 0x008000, Canvas::eCNAndENFont24, 16, false);
+    k10.canvas->canvasText("Time: " + String(minute) + " : " + String(sec), 10, 140, 0x008000, Canvas::eCNAndENFont24, 20, false);
+    k10.canvas->canvasDrawImage(50, 180, "S:/running/frame_00_delay-0.02s.png");
     k10.canvas->updateCanvas();
-    delay(1000);
+
+    k10.canvas->canvasDrawImage(50, 180, "S:/running/frame_01_delay-0.02s.png");
+    k10.canvas->updateCanvas();
+
+    k10.canvas->canvasDrawImage(50, 180, "S:/running/frame_02_delay-0.02s.png");
+    k10.canvas->updateCanvas();
+
+    k10.canvas->canvasDrawImage(50, 180, "S:/running/frame_03_delay-0.02s.png");
+    k10.canvas->updateCanvas();
+
+    k10.canvas->canvasDrawImage(50, 180, "S:/running/frame_04_delay-0.02s.png");
+    k10.canvas->updateCanvas();
+
+    k10.canvas->canvasDrawImage(50, 180, "S:/running/frame_05_delay-0.02s.png");
+    k10.canvas->updateCanvas();
+
+    k10.canvas->canvasDrawImage(50, 180, "S:/running/frame_06_delay-0.02s.png");
+    k10.canvas->updateCanvas();
+
+    k10.canvas->canvasDrawImage(50, 180, "S:/running/frame_07_delay-0.02s.png");
+    k10.canvas->updateCanvas();
+
+    k10.canvas->updateCanvas();
+    delay(400);
 }
 
 void weather()
@@ -574,9 +921,8 @@ void typeLine(String msg, uint16_t color)
     for (int i = 0; i < msg.length(); i++)
     {
         buffer += msg[i];
-        k10.canvas->canvasText(buffer, 10, 140, color, Canvas::eCNAndENFont16, 40, true);
+        k10.canvas->canvasText(buffer, 10, 280, color, Canvas::eCNAndENFont16, 40, true);
         k10.canvas->updateCanvas();
-        delay(20);
     }
 }
 
